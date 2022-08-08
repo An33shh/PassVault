@@ -1,0 +1,3 @@
+mysql-connector-python==8.0.24
+types-requests==2.25.6
+pyperclip==1.8.2

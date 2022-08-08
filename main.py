@@ -5,6 +5,7 @@ import requests
 import hashlib
 import pyperclip
 
+#Setup MySQL server on the local system and modify the credentials below
 database = mysql.connect(
     host="localhost",
     user="root",
@@ -48,7 +49,6 @@ def find_accounts(masterhash):
         print('Website/App name:', x[1], " |", 'URL:', x[2], " |", 'Email:', x[4], " |", 'Username:', x[3], " |", 'Password:', x[5], '\n')
     print('-' * 116)
 
-
 def find_website(masterhash):
     search_website = input('Please provide the Website/App name that you want to find the password for:')
     search_query = "SELECT * FROM logins WHERE website = %s AND masterpass = %s"
@@ -62,8 +62,8 @@ def find_website(masterhash):
         print('Website/App name:', x[1], " |", 'URL:', x[2], " |", 'Email:', x[4], " |", 'Username:', x[3], " |", 'Password:', x[5], '\n')
     print('-' * 116)
 
-
-def lookup(password):
+#Generated passwords are crosschecked using the PWNED API to make sure the passwords are not leaked.
+def lookup(password):                                                       
     sha1pwd = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
     head, tail = sha1pwd[:5], sha1pwd[5:]
     url = 'https://api.pwnedpasswords.com/range/' + head
